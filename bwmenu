@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Rofi extension for BitWarden-cli
+export NODE_NO_WARNINGS=1
 NAME="$(basename "$0")"
 VERSION="0.5"
 DEFAULT_CLEAR=5
@@ -382,7 +383,6 @@ get_totp() {
     show_full_items
   else
     id=$(echo "$1" | jq -r ".[0].id")
-
     if ! totp=$(bw --session "$BW_HASH" get totp "$id" 2>&1); then
       exit_error 1 "$totp"
     fi
